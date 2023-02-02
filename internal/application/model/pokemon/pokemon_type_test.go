@@ -12,7 +12,7 @@ func TestNewPokemonType(t *testing.T) {
 		pokemonType, err := NewPokemonType(Fire.String())
 
 		assert.NoError(t, err)
-		assert.Equal(t, pokemonType, Fire)
+		assert.Equal(t, *pokemonType, Fire)
 	})
 
 	t.Run("Return error if type name is invalid", func(t *testing.T) {

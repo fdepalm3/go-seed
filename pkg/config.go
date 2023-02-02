@@ -17,3 +17,11 @@ type RestClientConfig struct {
 type RedisConfig struct {
 	BaseUrl string `json:"base_url"`
 }
+
+type SQLConfig struct {
+	Driver   string
+	User     string
+	Password string
+	Endpoint string
+	DBName   string
+}

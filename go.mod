@@ -27,6 +27,7 @@ require (
 require (
 	github.com/alicebob/miniredis/v2 v2.23.0
 	github.com/golang/mock v1.6.0
+	github.com/jmoiron/sqlx v1.3.5
 	github.com/stretchr/testify v1.8.0
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
 )

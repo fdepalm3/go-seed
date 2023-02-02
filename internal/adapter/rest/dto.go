@@ -18,25 +18,25 @@ type pokemonResponse struct {
 
 func (p *pokemonResponse) ToDomain() (*pokemon.Pokemon, error) {
 
-	pokemonType1, err := pokemon.NewPokemonType(p.Types[0].Type.Name)
+	primaryType, err := pokemon.NewPokemonType(p.Types[0].Type.Name)
 	if err != nil {
 		return nil, err
 	}
 
-	var pokemonType2 *pokemon.Type
+	var secondaryType *pokemon.Type
 	if len(p.Types) > 1 {
-		pokemonType2, err = pokemon.NewPokemonType(p.Types[1].Type.Name)
+		secondaryType, err = pokemon.NewPokemonType(p.Types[1].Type.Name)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		pokemonType2, _ = pokemon.NewPokemonType("")
+		secondaryType, _ = pokemon.NewPokemonType("")
 	}
 
 	return pokemon.NewPokemon(
 		p.Id,
 		p.Name,
-		*pokemonType1,
-		*pokemonType2,
+		*primaryType,
+		secondaryType,
 	), nil
 }
