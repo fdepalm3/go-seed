@@ -2,8 +2,6 @@ module github.com/redbeestudios/go-seed
 
 go 1.19
 
-require github.com/gorilla/mux v1.8.0
-
 require (
 	github.com/denisenkom/go-mssqldb v0.12.3
 	github.com/go-redis/redis/v9 v9.0.0-beta.2
@@ -26,6 +24,7 @@ require (
 
 require (
 	github.com/alicebob/miniredis/v2 v2.23.0
+	github.com/go-chi/chi/v5 v5.0.8
 	github.com/golang/mock v1.6.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/stretchr/testify v1.8.0

@@ -8,8 +8,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/golang/mock/gomock"
-	"github.com/gorilla/mux"
 	"github.com/redbeestudios/go-seed/mocks"
 	"github.com/redbeestudios/go-seed/testdata"
 	"github.com/stretchr/testify/assert"
@@ -95,8 +95,8 @@ func TestGetPokemon(t *testing.T) {
 				dependencies.savePokemon,
 			)
 
-			router := mux.NewRouter()
-			router.HandleFunc("/pokemon/{name}", controller.GetPokemon).Methods(http.MethodGet)
+			router := chi.NewRouter()
+			router.Get("/pokemon/{name}", controller.GetPokemon)
 			s := &http.Server{
 				Handler: router,
 			}

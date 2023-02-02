@@ -1,17 +1,15 @@
 package cmd
 
 import (
-	"net/http"
-
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi/v5"
 )
 
-func InitRoutes(dependencies *Dependencies) *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/pokemon/{name}", dependencies.PokemonController.GetPokemon).Methods(http.MethodGet)
-	r.HandleFunc("/dumpPokemons", dependencies.PokemonController.DumpPokemons)
-	r.HandleFunc("/dumpPokemonsGoRoutine", dependencies.PokemonController.DumpPokemonsWithGoRoutines)
-	http.Handle("/", r)
+func InitRoutes(dependencies *Dependencies) *chi.Mux {
+	r := chi.NewRouter()
+
+	r.Get("/pokemon/{name}", dependencies.PokemonController.GetPokemon)
+	r.Post("/dumpPokemons", dependencies.PokemonController.DumpPokemons)
+	r.Post("/dumpPokemonsGoRoutine", dependencies.PokemonController.DumpPokemonsWithGoRoutines)
 
 	return r
 }

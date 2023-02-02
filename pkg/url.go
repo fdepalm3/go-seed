@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi/v5"
 )
 
 func GetStringFromPathOrDefault(
@@ -23,10 +23,10 @@ func GetStringFromPath(
 	key string,
 	r *http.Request,
 ) (string, error) {
-	str := mux.Vars(r)[key]
+	str := chi.URLParam(r, key)
 
 	if len(str) < 1 {
-		return "", fmt.Errorf("No key %s found in path", key)
+		return "", fmt.Errorf("no key %s found in path", key)
 	}
 
 	return str, nil

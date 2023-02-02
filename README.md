@@ -17,4 +17,4 @@ Just another redbee seed to make things easier.
 
 ### Routing:
 
-Using [Gorilla Mux](https://github.com/gorilla/mux) for routing.
+Using [Chi](https://github.com/go-chi/chi) for routing.
