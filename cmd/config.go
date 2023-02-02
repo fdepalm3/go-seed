@@ -15,7 +15,7 @@ type Config struct {
 func InitConfig(env pkg.Env) *Config {
 	config := &Config{}
 
-	if err := pkg.ReadJsonFile(env.String(), config); err != nil {
+	if err := pkg.ReadJsonFile(fmt.Sprintf("env_%s.json", env.String()), config); err != nil {
 		panic(fmt.Sprintf("Error initializing config: %s", env.String()))
 	}
 

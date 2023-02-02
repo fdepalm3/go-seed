@@ -2,7 +2,6 @@ package pkg
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 )
 
@@ -14,8 +13,8 @@ func MustMarshal(elem interface{}) string {
 	}
 }
 
-func ReadJsonFile(name string, reader any) error {
-	jsonConfig, err := os.Open(fmt.Sprintf("env_%s.json", name))
+func ReadJsonFile(filename string, reader any) error {
+	jsonConfig, err := os.Open(filename)
 	if err != nil {
 		return err
 	}
