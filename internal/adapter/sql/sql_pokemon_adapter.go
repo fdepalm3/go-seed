@@ -24,7 +24,7 @@ type SqlPokemonRestAdapter struct {
 }
 
 func (a *SqlPokemonRestAdapter) SavePokemon(ctx context.Context, pokemon *pokemon.Pokemon) error {
-	query := "INSERT INTO dbo.Pokemon (DexNumber, Name, Type1, Type2) VALUES ('" + strconv.Itoa(pokemon.Id()) + "', '" + pokemon.Name() + "', '" + string(pokemon.Type()) + "', '" + string(pokemon.SecondaryType()) + "');"
+	query := "INSERT INTO dbo.Pokemon (DexNumber, Name, Type1, Type2) VALUES ('" + strconv.Itoa(pokemon.Id()) + "', '" + pokemon.Name() + "', '" + pokemon.PrimaryType().String() + "', '" + pokemon.SecondaryType().String() + "');"
 	_, err := a.database.Exec(query)
 
 	if err != nil {
@@ -76,7 +76,7 @@ func (a *SqlPokemonRestAdapter) GetByName(
 	row := stmt.QueryRow()
 	var pkmnName string
 	var type1 string
-	var type2 *string
+	var type2 string
 	var dexNumber int
 	var id int
 	err = row.Scan(&pkmnName, &type1, &type2, &dexNumber, &id)
@@ -84,8 +84,8 @@ func (a *SqlPokemonRestAdapter) GetByName(
 		log.Fatal("Scan failed:", err.Error())
 	}
 	fmt.Printf("pkmnName:%s\n", pkmnName)
-	fmt.Printf("type1:%s\n", type1)
-	fmt.Printf("type2:%s\n", &type2)
+	fmt.Printf("type1: %s\n", type1)
+	fmt.Printf("type2: %s\n", type2)
 	fmt.Printf("dexNumber:%d\n", dexNumber)
 	fmt.Printf("id:%d\n", id)
 

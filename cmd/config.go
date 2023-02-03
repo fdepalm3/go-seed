@@ -1,9 +1,7 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/redbeestudios/go-seed/pkg"
 )
@@ -17,17 +15,8 @@ type Config struct {
 func InitConfig(env pkg.Env) *Config {
 	config := &Config{}
 
-	// TODO: este codigo podria moverse a pkg bajo el nombre de ReadJsonFile,
-	// para en el futuro formar parte de una lib de Redbee
-	jsonConfig, err := os.Open(fmt.Sprintf("env_%s.json", env.String()))
-	if err != nil {
-		panic(fmt.Sprintf("Error reading config file: %s", err.Error()))
-	}
-	defer jsonConfig.Close()
-
-	jsonParser := json.NewDecoder(jsonConfig)
-	if err = jsonParser.Decode(config); err != nil {
-		panic(fmt.Sprintf("Error parsing config file: %s", err.Error()))
+	if err := pkg.ReadJsonFile(fmt.Sprintf("env_%s.json", env.String()), config); err != nil {
+		panic(fmt.Sprintf("Error initializing config: %s", env.String()))
 	}
 
 	return config

@@ -9,11 +9,13 @@ import (
 func TestNewPokemon(t *testing.T) {
 	id := 3
 	name := "venusaur"
-	pokemonType := MustBuildPokemonType(Grass.String())
+	primaryType := MustBuildPokemonType(Grass.String())
+	secondaryType := MustBuildPokemonType(Rock.String())
 
-	p := NewPokemon(id, name, pokemonType)
+	p := NewPokemon(id, name, primaryType, &secondaryType)
 
 	assert.Equal(t, id, p.Id())
 	assert.Equal(t, name, p.Name())
-	assert.Equal(t, pokemonType, p.Type())
+	assert.Equal(t, primaryType, p.PrimaryType())
+	assert.Equal(t, &secondaryType, p.SecondaryType())
 }

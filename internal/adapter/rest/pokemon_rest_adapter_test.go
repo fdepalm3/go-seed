@@ -31,15 +31,23 @@ func TestGetByName(t *testing.T) {
 						`{
 							"id": %d,
 							"name": "%s",
-							"types": [{
-								"type": {
-									"name": "%s"
+							"types": [
+								{
+									"type": {
+										"name": "%s"
+									}
+								},
+								{
+									"type": {
+										"name": "%s"
+									}
 								}
-							}]
+							]
 						}`,
 						pokemon.Id(),
 						pokemon.Name(),
-						pokemon.Type().String(),
+						pokemon.PrimaryType().String(),
+						pokemon.SecondaryType().String(),
 					)))
 			},
 		},

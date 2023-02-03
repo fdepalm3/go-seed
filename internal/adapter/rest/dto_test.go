@@ -15,7 +15,12 @@ func TestToDomain(t *testing.T) {
 		Types: []responseType{
 			{
 				Type: typeDescription{
-					Name: pokemon.Type().String(),
+					Name: pokemon.PrimaryType().String(),
+				},
+			},
+			{
+				Type: typeDescription{
+					Name: pokemon.SecondaryType().String(),
 				},
 			},
 		},

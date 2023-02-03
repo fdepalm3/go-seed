@@ -10,9 +10,10 @@ import (
 func TestToDomain(t *testing.T) {
 	pokemon := testdata.Pokemon()
 	baseDTO := &pokemonDTO{
-		Id:   pokemon.Id(),
-		Name: pokemon.Name(),
-		Type: pokemon.Type().String(),
+		Id:            pokemon.Id(),
+		Name:          pokemon.Name(),
+		PrimaryType:   pokemon.PrimaryType().String(),
+		SecondaryType: (*string)(pokemon.SecondaryType()),
 	}
 
 	type test struct {
@@ -32,7 +33,7 @@ func TestToDomain(t *testing.T) {
 			name: "Error if pokemon type is invalid",
 			dto: func() *pokemonDTO {
 				response := baseDTO
-				response.Type = "???"
+				response.PrimaryType = "???"
 				return response
 			},
 			expectErr: true,
@@ -60,5 +61,5 @@ func TestFromDomain(t *testing.T) {
 
 	assert.Equal(t, pokemon.Id(), dto.Id)
 	assert.Equal(t, pokemon.Name(), dto.Name)
-	assert.Equal(t, pokemon.Type().String(), dto.Type)
+	assert.Equal(t, pokemon.PrimaryType().String(), dto.PrimaryType)
 }

@@ -16,7 +16,8 @@ import (
 )
 
 type controllerDependencies struct {
-	getByName *mocks.MockGetByName
+	getByName   *mocks.MockGetByName
+	savePokemon *mocks.MockSavePokemon
 }
 
 func makePokemonControllerDependencies(t *testing.T) *controllerDependencies {
@@ -28,7 +29,10 @@ func makePokemonControllerDependencies(t *testing.T) *controllerDependencies {
 func TestNewPokemonController(t *testing.T) {
 	dependencies := makePokemonControllerDependencies(t)
 
-	controller := NewPokemonController(dependencies.getByName)
+	controller := NewPokemonController(
+		dependencies.getByName,
+		dependencies.savePokemon,
+	)
 	assert.NotNil(t, controller)
 }
 
@@ -86,7 +90,10 @@ func TestGetPokemon(t *testing.T) {
 				test.mock(dependencies)
 			}
 
-			controller := NewPokemonController(dependencies.getByName)
+			controller := NewPokemonController(
+				dependencies.getByName,
+				dependencies.savePokemon,
+			)
 
 			router := mux.NewRouter()
 			router.HandleFunc("/pokemon/{name}", controller.GetPokemon).Methods(http.MethodGet)

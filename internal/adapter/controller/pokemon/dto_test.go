@@ -14,5 +14,5 @@ func TestFromDomain(t *testing.T) {
 
 	assert.Equal(t, pokemon.Id(), dto.Id)
 	assert.Equal(t, pokemon.Name(), dto.Name)
-	assert.Equal(t, pokemon.Type().String(), dto.Type)
+	assert.Equal(t, pokemon.PrimaryType().String(), dto.Type)
 }

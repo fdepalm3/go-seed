@@ -18,7 +18,10 @@ type PokemonController struct {
 	savePokemon      in.SavePokemon
 }
 
-func NewPokemonController(getPokemonByName in.GetByName, savePokemon in.SavePokemon) *PokemonController {
+func NewPokemonController(
+	getPokemonByName in.GetByName,
+	savePokemon in.SavePokemon,
+) *PokemonController {
 	return &PokemonController{
 		getPokemonByName: getPokemonByName,
 		savePokemon:      savePokemon,

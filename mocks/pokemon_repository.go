@@ -49,3 +49,17 @@ func (mr *MockPokemonRepositoryMockRecorder) GetByName(ctx, name interface{}) *g
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByName", reflect.TypeOf((*MockPokemonRepository)(nil).GetByName), ctx, name)
 }
+
+// SavePokemon mocks base method.
+func (m *MockPokemonRepository) SavePokemon(ctx context.Context, pokemon *pokemon.Pokemon) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SavePokemon", ctx, pokemon)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SavePokemon indicates an expected call of SavePokemon.
+func (mr *MockPokemonRepositoryMockRecorder) SavePokemon(ctx, pokemon interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SavePokemon", reflect.TypeOf((*MockPokemonRepository)(nil).SavePokemon), ctx, pokemon)
+}
