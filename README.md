@@ -1,4 +1,4 @@
-# <p align="center">Semilla Go</p>
+# <div align="center"><img src="https://raw.githubusercontent.com/gist/GeekTree0101/05d338bb59109fc71871711c6fa49377/raw/3ff868ffcf2f84d419c392667335fe7e9f1bf155/dancing-gopher.gif" width="40" height="40"> Semilla Go <img src="https://raw.githubusercontent.com/gist/GeekTree0101/05d338bb59109fc71871711c6fa49377/raw/3ff868ffcf2f84d419c392667335fe7e9f1bf155/dancing-gopher.gif" width="40" height="40"></div>
 # <p align="center"><img src="https://gophers-latam.github.io/img/community.png" width="500" height="175" /></p>
 
 La idea de este repositorio es proveer una posible implementación de un web server en Go con los minimos features necesarios 
