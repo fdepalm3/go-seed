@@ -1,5 +1,5 @@
-# Semilla Go
-# <img src="https://gophers-latam.github.io/img/community.png" width="500" height="250" />
+# <p align="center">Semilla Go</p>
+# <p align="center"><img src="https://gophers-latam.github.io/img/community.png" width="500" height="175" /></p>
 
 La idea de este repositorio es proveer una posible implementación de un web server en Go con los minimos features necesarios 
 para atacar el MVP de un proyecto típico en Redbee. Pero también buscamos que sirva como base para construir un espacio de aprendizaje
@@ -11,10 +11,11 @@ Nos podes encontrar en:
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" width="15" height="15"> [redbeego](https://redbee.slack.com/archives/C041MR2A5GB)
 
-<img src="https://img2.freepng.es/20181201/ib/kisspng-portable-network-graphics-trello-scalable-vector-g-5c025368ae6bb9.4395252315436562967144.jpg" width="15" height="15">[Trello](https://trello.com/b/UdjUuG5G/semilla-go)
+<img src="https://img2.freepng.es/20181201/ib/kisspng-portable-network-graphics-trello-scalable-vector-g-5c025368ae6bb9.4395252315436562967144.jpg" width="15" height="15"> [Trello](https://trello.com/b/UdjUuG5G/semilla-go)
 
 
-Esta implementación incluye:
+
+## Features
 * Implementación de hexagonal
 * Configuración de rutas para recibir requests HTTP
 * Tests unitarios
