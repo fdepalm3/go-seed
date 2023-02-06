@@ -28,6 +28,19 @@ func NewPokemonController(
 	}
 }
 
+func getErrorDetail(error error) (int, string) {
+	switch errorType := error.(type) {
+	case pkg.BadRequestException:
+		return http.StatusBadRequest, errorType.Msj
+	case pkg.NotFoundException:
+		return http.StatusNotFound, errorType.Msj
+	case pkg.BadGatewayException:
+		return http.StatusBadGateway, errorType.Msj
+	default:
+		return http.StatusInternalServerError, errorType.Error()
+	}
+}
+
 func (c *PokemonController) GetPokemon(
 	response http.ResponseWriter,
 	request *http.Request,
@@ -42,7 +55,8 @@ func (c *PokemonController) GetPokemon(
 
 	pokemon, err := c.getPokemonByName.Get(ctx, name)
 	if err != nil {
-		http.Error(response, err.Error(), http.StatusInternalServerError)
+		status, msj := getErrorDetail(err)
+		http.Error(response, msj, status)
 		return
 	}
 
