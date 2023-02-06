@@ -44,6 +44,7 @@ func (a *PokemonRestAdapter) GetByName(
 ) (*pokemon.Pokemon, error) {
 	response, err := a.client.
 		R().
+		SetContext(ctx).
 		SetPathParam("name", name).
 		Get("/pokemon/{name}")
 
