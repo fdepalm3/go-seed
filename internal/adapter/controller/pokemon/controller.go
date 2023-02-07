@@ -28,19 +28,6 @@ func NewPokemonController(
 	}
 }
 
-func getErrorDetail(error error) (int, string) {
-	switch errorType := error.(type) {
-	case pkg.BadRequestException:
-		return http.StatusBadRequest, errorType.Msj
-	case pkg.NotFoundException:
-		return http.StatusNotFound, errorType.Msj
-	case pkg.BadGatewayException:
-		return http.StatusBadGateway, errorType.Msj
-	default:
-		return http.StatusInternalServerError, errorType.Error()
-	}
-}
-
 func (c *PokemonController) GetPokemon(
 	response http.ResponseWriter,
 	request *http.Request,
@@ -55,15 +42,8 @@ func (c *PokemonController) GetPokemon(
 
 	pokemon, err := c.getPokemonByName.Get(ctx, name)
 	if err != nil {
-		status, msj := getErrorDetail(err)
+		status, msj := pkg.GetErrorDetail(err)
 		http.Error(response, msj, status)
-		return
-	}
-
-	// TODO: Creo que esta rara esta validacion, si el pokemon es nulo deberiamos
-	// haber propagado un error antes
-	if pokemon == nil {
-		http.Error(response, err.Error(), http.StatusNotFound)
 		return
 	}
 
@@ -74,7 +54,11 @@ func (c *PokemonController) GetPokemon(
 	}
 
 	response.Header().Set("Content-Type", "application/json")
-	response.Write(js)
+	_, err = response.Write(js)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func (c *PokemonController) DumpPokemons(response http.ResponseWriter, request *http.Request) {

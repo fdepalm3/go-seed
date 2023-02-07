@@ -44,10 +44,12 @@ func checkError(response *resty.Response) error {
 	switch response.StatusCode() {
 	case 200:
 		return nil
+	case 400:
+		return pkg.BadRequestException{Msj: "Bad Request to Pokemon Api", Detail: "Bad Request to Pokemon Api"}
 	case 404:
-		return pkg.NotFoundException{Msj: "Not Found", Detail: "Pokemon Not Found"}
+		return pkg.NotFoundException{Msj: "Pokemon Not Found", Detail: "Pokemon Not Found"}
 	case 502:
-		return pkg.BadRequestException{Msj: "Bad Gateway", Detail: "Bad Gateway to Pokemon Api"}
+		return pkg.BadGatewayException{Msj: "Bad Gateway to Pokemon Api", Detail: "Bad Gateway to Pokemon Api"}
 	default:
 		return fmt.Errorf("status response: %d - %s", response.StatusCode(), response.Status())
 	}
