@@ -72,15 +72,6 @@ func TestGetPokemon(t *testing.T) {
 			},
 			expectedCode: 500,
 		},
-		//{
-		//	name: "404 if no pokemon is exists with name",
-		//	mock: func(dependencies *controllerDependencies) {
-		//		dependencies.getByName.EXPECT().
-		//			Get(gomock.Any(), pokemon.Name()).
-		//			Return(nil, nil)
-		//	},
-		//	expectedCode: 404,
-		//},
 	}
 
 	for _, test := range tests {

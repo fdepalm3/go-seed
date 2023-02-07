@@ -42,14 +42,8 @@ func (c *PokemonController) GetPokemon(
 
 	pokemon, err := c.getPokemonByName.Get(ctx, name)
 	if err != nil {
-		http.Error(response, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	// TODO: Creo que esta rara esta validacion, si el pokemon es nulo deberiamos
-	// haber propagado un error antes
-	if pokemon == nil {
-		http.Error(response, err.Error(), http.StatusNotFound)
+		status, msj := pkg.GetErrorDetail(err)
+		http.Error(response, msj, status)
 		return
 	}
 
@@ -60,7 +54,11 @@ func (c *PokemonController) GetPokemon(
 	}
 
 	response.Header().Set("Content-Type", "application/json")
-	response.Write(js)
+	_, err = response.Write(js)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func (c *PokemonController) DumpPokemons(response http.ResponseWriter, request *http.Request) {
