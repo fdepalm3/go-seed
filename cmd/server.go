@@ -7,10 +7,10 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/go-chi/chi/v5"
 )
 
-func StartServer(config *Config, router *mux.Router) {
+func StartServer(config *Config, router *chi.Mux) {
 	srv := &http.Server{
 		Addr:         config.Server.Address,
 		WriteTimeout: time.Duration(config.Server.WriteTimeout) * time.Second,
