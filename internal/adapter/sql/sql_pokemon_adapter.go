@@ -23,6 +23,11 @@ type SqlPokemonRestAdapter struct {
 	repository out.PokemonRepository
 }
 
+func (a *SqlPokemonRestAdapter) GetMoveByName(ctx context.Context, name string) (*pokemon.Move, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (a *SqlPokemonRestAdapter) SavePokemon(ctx context.Context, pokemon *pokemon.Pokemon) error {
 	query := "INSERT INTO dbo.Pokemon (DexNumber, Name, Type1, Type2) VALUES ('" + strconv.Itoa(pokemon.Id()) + "', '" + pokemon.Name() + "', '" + pokemon.PrimaryType().String() + "', '" + pokemon.SecondaryType().String() + "');"
 	_, err := a.database.Exec(query)

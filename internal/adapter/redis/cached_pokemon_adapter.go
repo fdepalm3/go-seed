@@ -20,6 +20,11 @@ type CachedPokemonRestAdapter struct {
 	repository out.PokemonRepository
 }
 
+func (a *CachedPokemonRestAdapter) GetMoveByName(ctx context.Context, name string) (*pokemon.Move, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (a *CachedPokemonRestAdapter) SavePokemon(ctx context.Context, pokemon *pokemon.Pokemon) error {
 	//TODO implement me
 	panic("implement me")

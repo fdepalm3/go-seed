@@ -16,6 +16,12 @@ type pokemonResponse struct {
 	Types []responseType `json:"types"`
 }
 
+type moveResponse struct {
+	Id   int             `json:"id"`
+	Name string          `json:"name"`
+	Type typeDescription `json:"type"`
+}
+
 func (p *pokemonResponse) ToDomain() (*pokemon.Pokemon, error) {
 
 	primaryType, err := pokemon.NewPokemonType(p.Types[0].Type.Name)
@@ -38,5 +44,19 @@ func (p *pokemonResponse) ToDomain() (*pokemon.Pokemon, error) {
 		p.Name,
 		*primaryType,
 		secondaryType,
+	), nil
+}
+
+func (p *moveResponse) ToDomain() (*pokemon.Move, error) {
+
+	primaryType, err := pokemon.NewPokemonType(p.Type.Name)
+	if err != nil {
+		return nil, err
+	}
+
+	return pokemon.NewMove(
+		p.Id,
+		p.Name,
+		primaryType,
 	), nil
 }

@@ -10,7 +10,7 @@ import (
 func TestFromDomain(t *testing.T) {
 	pokemon := testdata.Pokemon()
 
-	dto := fromDomain(pokemon)
+	dto := pokemonFromDomain(pokemon)
 
 	assert.Equal(t, pokemon.Id(), dto.Id)
 	assert.Equal(t, pokemon.Name(), dto.Name)

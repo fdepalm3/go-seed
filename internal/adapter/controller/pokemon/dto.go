@@ -8,10 +8,24 @@ type pokemonResponse struct {
 	Type string `json:"type"`
 }
 
-func fromDomain(pokemon *pokemon.Pokemon) *pokemonResponse {
+type moveResponse struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+	Type string `json:"type"`
+}
+
+func pokemonFromDomain(pokemon *pokemon.Pokemon) *pokemonResponse {
 	return &pokemonResponse{
 		Id:   pokemon.Id(),
 		Name: pokemon.Name(),
 		Type: pokemon.PrimaryType().String(),
+	}
+}
+
+func moveFromDomain(move *pokemon.Move) *moveResponse {
+	return &moveResponse{
+		Id:   move.Id(),
+		Name: move.Name(),
+		Type: move.MoveType().String(),
 	}
 }

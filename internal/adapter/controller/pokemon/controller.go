@@ -47,7 +47,40 @@ func (c *PokemonController) GetPokemon(
 		return
 	}
 
-	js, err := json.Marshal(fromDomain(pokemon))
+	js, err := json.Marshal(pokemonFromDomain(pokemon))
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	response.Header().Set("Content-Type", "application/json")
+	_, err = response.Write(js)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func (c *PokemonController) GetAttack(
+	response http.ResponseWriter,
+	request *http.Request,
+) {
+	ctx := request.Context()
+
+	name, err := pkg.GetStringFromPath("name", request)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	move, err := c.getPokemonByName.Attack(ctx, name)
+	if err != nil {
+		status, msj := pkg.GetErrorDetail(err)
+		http.Error(response, msj, status)
+		return
+	}
+
+	js, err := json.Marshal(moveFromDomain(move))
 	if err != nil {
 		http.Error(response, err.Error(), http.StatusInternalServerError)
 		return

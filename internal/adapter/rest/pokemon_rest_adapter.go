@@ -19,6 +19,31 @@ type PokemonRestAdapter struct {
 	client *resty.Client
 }
 
+func (a *PokemonRestAdapter) GetMoveByName(ctx context.Context, name string) (*pokemon.Move, error) {
+	log.Printf("Call Pokemon Api with parameter: %s\n", name)
+
+	response, err := a.client.
+		R().
+		SetContext(ctx).
+		SetPathParam("name", name).
+		Get("/move/{name}")
+
+	if err != nil {
+		return nil, err
+	}
+
+	if errorResponse := checkError(response); errorResponse != nil {
+		return nil, errorResponse
+	}
+
+	var responseObject = &moveResponse{}
+	if err := json.Unmarshal(response.Body(), responseObject); err != nil {
+		return nil, err
+	}
+
+	return responseObject.ToDomain()
+}
+
 func (a *PokemonRestAdapter) SavePokemon(ctx context.Context, pokemon *pokemon.Pokemon) error {
 	//TODO implement me
 	panic("implement me")

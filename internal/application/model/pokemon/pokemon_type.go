@@ -49,8 +49,8 @@ var allowedTypes = map[string]Type{
 }
 
 func NewPokemonType(pokemonType string) (*Type, error) {
-	if t, ok := allowedTypes[pokemonType]; ok {
-		return &t, nil
+	if tipo, existe := allowedTypes[pokemonType]; existe {
+		return &tipo, nil
 	}
 	return nil, fmt.Errorf("Invalid pokemon type: %s", pokemonType)
 }

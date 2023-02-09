@@ -14,6 +14,10 @@ type GetByName struct {
 	pokemonRepository out.PokemonRepository
 }
 
+func (c *GetByName) Attack(ctx context.Context, name string) (*pokemon.Move, error) {
+	return c.pokemonRepository.GetMoveByName(ctx, name)
+}
+
 func NewGetByName(pokemonRepository out.PokemonRepository) *GetByName {
 	return &GetByName{
 		pokemonRepository: pokemonRepository,

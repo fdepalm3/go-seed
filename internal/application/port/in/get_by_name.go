@@ -10,4 +10,5 @@ import (
 
 type GetByName interface {
 	Get(ctx context.Context, name string) (*pokemon.Pokemon, error)
+	Attack(ctx context.Context, name string) (*pokemon.Move, error)
 }
