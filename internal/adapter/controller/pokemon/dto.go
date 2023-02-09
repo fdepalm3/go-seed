@@ -18,7 +18,7 @@ func pokemonFromDomain(pokemon *pokemon.Pokemon) *pokemonResponse {
 	return &pokemonResponse{
 		Id:   pokemon.Id(),
 		Name: pokemon.Name(),
-		Type: pokemon.PrimaryType().String(),
+		Type: pokemon.PrimaryType().Name,
 	}
 }
 
@@ -26,6 +26,6 @@ func moveFromDomain(move *pokemon.Move) *moveResponse {
 	return &moveResponse{
 		Id:   move.Id(),
 		Name: move.Name(),
-		Type: move.MoveType().String(),
+		Type: move.MoveType().Name,
 	}
 }

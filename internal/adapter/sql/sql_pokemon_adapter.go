@@ -29,7 +29,7 @@ func (a *SqlPokemonRestAdapter) GetMoveByName(ctx context.Context, name string) 
 }
 
 func (a *SqlPokemonRestAdapter) SavePokemon(ctx context.Context, pokemon *pokemon.Pokemon) error {
-	query := "INSERT INTO dbo.Pokemon (DexNumber, Name, Type1, Type2) VALUES ('" + strconv.Itoa(pokemon.Id()) + "', '" + pokemon.Name() + "', '" + pokemon.PrimaryType().String() + "', '" + pokemon.SecondaryType().String() + "');"
+	query := "INSERT INTO dbo.Pokemon (DexNumber, Name, Type1, Type2) VALUES ('" + strconv.Itoa(pokemon.Id()) + "', '" + pokemon.Name() + "', '" + pokemon.PrimaryType().Name + "', '" + pokemon.SecondaryType().Name + "');"
 	_, err := a.database.Exec(query)
 
 	if err != nil {
