@@ -154,3 +154,42 @@ func (c *PokemonController) retrieveAndSavePokemon(response http.ResponseWriter,
 
 	_ = c.savePokemon.Save(ctx, pokemon)
 }
+
+func (c *PokemonController) DamageRelations(
+	response http.ResponseWriter,
+	request *http.Request,
+) {
+	ctx := request.Context()
+
+	name, err := pkg.GetStringFromPath("pokemon", request)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	move, err := pkg.GetStringFromPath("move", request)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	multiplicador, err := c.getPokemonByName.DamageRelations(ctx, name, move)
+	if err != nil {
+		status, msj := pkg.GetErrorDetail(err)
+		http.Error(response, msj, status)
+		return
+	}
+
+	// js, err := json.Marshal(moveFromDomain(move))
+	// if err != nil {
+	// 	http.Error(response, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+
+	response.Header().Set("Content-Type", "application/json")
+	_, err = response.Write([]byte(multiplicador))
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}

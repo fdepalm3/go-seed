@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/redbeestudios/go-seed/cmd"
+	"github.com/redbeestudios/go-seed/internal/application/model/pokemon"
 	"github.com/redbeestudios/go-seed/pkg"
 )
 
@@ -16,6 +17,7 @@ func main() {
 	config := cmd.InitConfig(env)
 	deps := cmd.InitDependencies(config)
 	router := cmd.InitRoutes(deps)
+	pokemon.InitPokemonTypes()
 
 	cmd.StartServer(config, router)
 }

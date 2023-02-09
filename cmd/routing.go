@@ -9,6 +9,7 @@ func InitRoutes(dependencies *Dependencies) *chi.Mux {
 
 	r.Get("/pokemon/{name}", dependencies.PokemonController.GetPokemon)
 	r.Get("/attack/{name}", dependencies.PokemonController.GetAttack)
+	r.Get("/damage_relations/{pokemon}/{move}", dependencies.PokemonController.DamageRelations)
 	r.Post("/dumpPokemons", dependencies.PokemonController.DumpPokemons)
 	r.Post("/dumpPokemonsGoRoutine", dependencies.PokemonController.DumpPokemonsWithGoRoutines)
 

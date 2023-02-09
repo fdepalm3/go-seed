@@ -2,61 +2,73 @@ package pokemon
 
 import "fmt"
 
-type Type string
+type Type struct {
+	Name        string
+	Weaknesses  []*Type
+	Resistances []*Type
+	Inmunities  []*Type
+}
 
-const (
-	Fire     Type = "fire"
-	Grass    Type = "grass"
-	Water    Type = "water"
-	Normal   Type = "normal"
-	Flying   Type = "flying"
-	Fighting Type = "fighting"
-	Poison   Type = "poison"
-	Electric Type = "electric"
-	Ground   Type = "ground"
-	Rock     Type = "rock"
-	Psychic  Type = "psychic"
-	Ice      Type = "ice"
-	Bug      Type = "bug"
-	Ghost    Type = "ghost"
-	Steel    Type = "steel"
-	Dragon   Type = "dragon"
-	Dark     Type = "dark"
-	Fairy    Type = "fairy"
-	Invalid  Type = ""
-)
+// 	Water    Type = "water"
+// 	Normal   Type = "normal"
+// 	Flying   Type = "flying"
+// 	Fighting Type = "fighting"
+// 	Poison   Type = "poison"
+// 	Electric Type = "electric"
+// 	Ground   Type = "ground"
+// 	Rock     Type = "rock"
+// 	Psychic  Type = "psychic"
+// 	Ice      Type = "ice"
+// 	Bug      Type = "bug"
+// 	Ghost    Type = "ghost"
+// 	Steel    Type = "steel"
+// 	Dragon   Type = "dragon"
+// 	Dark     Type = "dark"
+// 	Fairy    Type = "fairy"
+// 	Invalid  Type = ""
+// )
 
-var allowedTypes = map[string]Type{
-	Fire.String():     Fire,
-	Grass.String():    Grass,
-	Water.String():    Water,
-	Normal.String():   Normal,
-	Flying.String():   Flying,
-	Fighting.String(): Fighting,
-	Poison.String():   Poison,
-	Electric.String(): Electric,
-	Ground.String():   Ground,
-	Rock.String():     Rock,
-	Psychic.String():  Psychic,
-	Ice.String():      Ice,
-	Bug.String():      Bug,
-	Ghost.String():    Ghost,
-	Steel.String():    Steel,
-	Dragon.String():   Dragon,
-	Dark.String():     Dark,
-	Fairy.String():    Fairy,
-	Invalid.String():  Invalid,
+var allowedTypes = map[string]*Type{
+
+	"fire": &Type{
+		Name: "fire",
+	},
+	"grass": &Type{
+		Name: "grass",
+	},
+	// Water.String():    Water,
+	// Normal.String():   Normal,
+	// Flying.String():   Flying,
+	// Fighting.String(): Fighting,
+	// Poison.String():   Poison,
+	// Electric.String(): Electric,
+	// Ground.String():   Ground,
+	// Rock.String():     Rock,
+	// Psychic.String():  Psychic,
+	// Ice.String():      Ice,
+	// Bug.String():      Bug,
+	// Ghost.String():    Ghost,
+	// Steel.String():    Steel,
+	// Dragon.String():   Dragon,
+	// Dark.String():     Dark,
+	// Fairy.String():    Fairy,
+	// Invalid.String():  Invalid,
 }
 
 func NewPokemonType(pokemonType string) (*Type, error) {
 	if tipo, existe := allowedTypes[pokemonType]; existe {
-		return &tipo, nil
+		return tipo, nil
 	}
 	return nil, fmt.Errorf("Invalid pokemon type: %s", pokemonType)
 }
 
-func (t Type) String() string {
-	return string(t)
+func InitPokemonTypes() {
+	allowedTypes["fire"].Resistances = []*Type{
+		allowedTypes["grass"],
+	}
+	allowedTypes["grass"].Weaknesses = []*Type{
+		allowedTypes["fire"],
+	}
 }
 
 // Testing purpose functions/methods
