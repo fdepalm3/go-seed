@@ -3,7 +3,7 @@ package pokemon
 type Move struct {
 	id         int
 	name       string
-	attackType *Type
+	attackType *PokemonType
 }
 
 func (a *Move) Id() int {
@@ -14,14 +14,14 @@ func (a *Move) Name() string {
 	return a.name
 }
 
-func (a *Move) MoveType() *Type {
+func (a *Move) MoveType() *PokemonType {
 	return a.attackType
 }
 
 func NewMove(
 	id int,
 	name string,
-	attackType *Type,
+	attackType *PokemonType,
 ) *Move {
 	return &Move{
 		id:         id,

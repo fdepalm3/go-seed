@@ -18,7 +18,7 @@ func (p *pokemonDTO) ToDomain() (*pokemon.Pokemon, error) {
 		return nil, err
 	}
 
-	var secondaryType *pokemon.Type
+	var secondaryType *pokemon.PokemonType
 	if p.SecondaryType != nil {
 		secondaryType, err = pokemon.NewPokemonType(*p.SecondaryType)
 		if err != nil {

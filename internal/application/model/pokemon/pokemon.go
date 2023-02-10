@@ -3,15 +3,15 @@ package pokemon
 type Pokemon struct {
 	id                   int
 	name                 string
-	primaryType          Type
-	pokemonSecondaryType *Type
+	primaryType          *PokemonType
+	pokemonSecondaryType *PokemonType
 }
 
 func NewPokemon(
 	id int,
 	name string,
-	primaryType Type,
-	secondaryType *Type,
+	primaryType *PokemonType,
+	secondaryType *PokemonType,
 ) *Pokemon {
 	return &Pokemon{
 		id:                   id,
@@ -29,10 +29,10 @@ func (p *Pokemon) Name() string {
 	return p.name
 }
 
-func (p *Pokemon) PrimaryType() Type {
+func (p *Pokemon) PrimaryType() *PokemonType {
 	return p.primaryType
 }
 
-func (p *Pokemon) SecondaryType() *Type {
+func (p *Pokemon) SecondaryType() *PokemonType {
 	return p.pokemonSecondaryType
 }

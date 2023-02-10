@@ -8,7 +8,7 @@ import (
 
 func TestNewPokemonType(t *testing.T) {
 
-	t.Run("Return Type if name is valid", func(t *testing.T) {
+	t.Run("Return PokemonType if name is valid", func(t *testing.T) {
 		pokemonType, err := NewPokemonType(Fire.String())
 
 		assert.NoError(t, err)

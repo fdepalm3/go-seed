@@ -24,35 +24,26 @@ type moveResponse struct {
 
 func (p *pokemonResponse) ToDomain() (*pokemon.Pokemon, error) {
 
-	primaryType, err := pokemon.NewPokemonType(p.Types[0].Type.Name)
-	if err != nil {
-		return nil, err
-	}
+	primaryType := pokemon.Type(p.Types[0].Type.Name)
 
-	var secondaryType *pokemon.Type
+	var secondaryType *pokemon.PokemonType
 	if len(p.Types) > 1 {
-		secondaryType, err = pokemon.NewPokemonType(p.Types[1].Type.Name)
-		if err != nil {
-			return nil, err
-		}
+		secondaryType = pokemon.Type(p.Types[1].Type.Name)
 	} else {
-		secondaryType, _ = pokemon.NewPokemonType("")
+		secondaryType = pokemon.Type("")
 	}
 
 	return pokemon.NewPokemon(
 		p.Id,
 		p.Name,
-		*primaryType,
+		primaryType,
 		secondaryType,
 	), nil
 }
 
 func (p *moveResponse) ToDomain() (*pokemon.Move, error) {
 
-	primaryType, err := pokemon.NewPokemonType(p.Type.Name)
-	if err != nil {
-		return nil, err
-	}
+	primaryType := pokemon.Type(p.Type.Name)
 
 	return pokemon.NewMove(
 		p.Id,
