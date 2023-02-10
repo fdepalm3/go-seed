@@ -13,23 +13,17 @@ type pokemonDTO struct {
 }
 
 func (p *pokemonDTO) ToDomain() (*pokemon.Pokemon, error) {
-	primaryType, err := pokemon.NewPokemonType(p.PrimaryType)
-	if err != nil {
-		return nil, err
-	}
+	primaryType := pokemon.Type(p.PrimaryType)
 
 	var secondaryType *pokemon.PokemonType
 	if p.SecondaryType != nil {
-		secondaryType, err = pokemon.NewPokemonType(*p.SecondaryType)
-		if err != nil {
-			return nil, err
-		}
+		secondaryType = pokemon.Type(*p.SecondaryType)
 	}
 
 	return pokemon.NewPokemon(
 		p.Id,
 		p.Name,
-		*primaryType,
+		primaryType,
 		secondaryType,
 	), nil
 }
@@ -38,13 +32,13 @@ func fromDomain(p *pokemon.Pokemon) *pokemonDTO {
 
 	var secondaryType *string
 	if p.SecondaryType() != nil {
-		secondaryType = pkg.ToPointer(p.SecondaryType().String())
+		secondaryType = pkg.ToPointer(p.SecondaryType().Name)
 	}
 
 	return &pokemonDTO{
 		Id:            p.Id(),
 		Name:          p.Name(),
-		PrimaryType:   p.PrimaryType().String(),
+		PrimaryType:   p.PrimaryType().Name,
 		SecondaryType: secondaryType,
 	}
 }

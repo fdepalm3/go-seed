@@ -36,3 +36,15 @@ func (p *Pokemon) PrimaryType() *PokemonType {
 func (p *Pokemon) SecondaryType() *PokemonType {
 	return p.pokemonSecondaryType
 }
+
+func (p *Pokemon) DamageRelation(t *PokemonType) float64 {
+
+	multiplier := 1.0
+
+	multiplier = multiplier * p.PrimaryType().Multiplier(t)
+
+	multiplier = multiplier * p.SecondaryType().Multiplier(t)
+
+	return multiplier
+
+}

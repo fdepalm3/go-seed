@@ -2,6 +2,7 @@ package pokemon
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/redbeestudios/go-seed/internal/application/model/pokemon"
 	"github.com/redbeestudios/go-seed/internal/application/port/in"
@@ -20,7 +21,7 @@ func (c *GetByName) Attack(ctx context.Context, name string) (*pokemon.Move, err
 
 func (c *GetByName) DamageRelations(ctx context.Context, name string, attackName string) (string, error) {
 
-	pokemon, err := c.pokemonRepository.GetByName(ctx, name)
+	p, err := c.pokemonRepository.GetByName(ctx, name)
 	if err != nil {
 		return "", err
 	}
@@ -30,13 +31,10 @@ func (c *GetByName) DamageRelations(ctx context.Context, name string, attackName
 		return "", err
 	}
 
-	var multiplicador string = "x1"
-	for _, v := range pokemon.PrimaryType().Weaknesses {
-		if v == attack.MoveType() {
-			multiplicador = "x2"
-		}
-	}
-	return multiplicador, nil
+	multiplier := p.DamageRelation(attack.MoveType())
+
+	return fmt.Sprintf("%f", multiplier), nil
+
 }
 
 func NewGetByName(pokemonRepository out.PokemonRepository) *GetByName {
