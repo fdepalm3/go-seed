@@ -25,3 +25,9 @@ type SQLConfig struct {
 	Endpoint string
 	DBName   string
 }
+type KafkaConfig struct {
+
+	Broker string
+	Topic string
+	Protocol string
+}

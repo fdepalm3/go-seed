@@ -1,6 +1,6 @@
 {
     "server": {
-        "address": "localhost:8080",
+        "address": "localhost:8090",
         "read_timeout": 15,
         "write_timeout": 15,
         "idle_timeout": 60
@@ -13,5 +13,10 @@
     },
     "redis": {
         "address": "localhost:6379"
+    },
+    "kafka": {
+        "broker": "localhost:9092",
+        "topic": "kafka-topic",
+        "protocol": "tcp"
     }
 }
